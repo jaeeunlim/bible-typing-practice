@@ -7,6 +7,8 @@ import Sidebar from "./components/Sidebar";
 import "./css/sidebar-styles.css";
 
 export default class App extends React.Component {
+  currentYear = new Date().getFullYear();
+  
   render() {
     return (
       <div id="App">
@@ -20,6 +22,9 @@ export default class App extends React.Component {
           />
         </Switch>
         <div id="page-wrap" />
+        <footer>
+          <small>&copy; Copyright {this.currentYear}, Esther Lim</small>
+        </footer>
       </div>
     );
   }
