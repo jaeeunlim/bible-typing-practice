@@ -87,8 +87,7 @@ span.typed {
 }
 
 .btn-group-bible {
-  height: 100vh;
-  padding-top: 10vh;
+  padding: 10vh 0;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -97,7 +96,7 @@ span.typed {
 
 .btn-group-bible .btn-testament {
   position: relative;
-  top: -10vh;
+  top: 20vh;
   margin: 5vw;
   width: 30vw;
   height: 30vh;
