@@ -1,2 +1,2 @@
-# bible-typing-practice
-Created with CodeSandbox
+# Bible Typing Practice
+React web application for practicing typing with Bible verses.
