@@ -9,6 +9,7 @@ import { BsBookHalf } from "react-icons/bs";
 import { FaKey } from "react-icons/fa";
 import BibleVerse from "./components/BibleVerse";
 import Keyboard, { mapSymbolToKey } from "./components/Keyboard";
+import FingerLabelsImg from "./images/finger-labels.jpg";
 
 import "./css/styles.css";
 
@@ -224,7 +225,7 @@ class Typing extends React.Component {
             <center>
               <img
                 id="img-hands"
-                src={require("./images/finger-labels.png")}
+                src={FingerLabelsImg}
                 alt="Finger Labels"
               />
             </center>
