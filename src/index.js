@@ -6,10 +6,10 @@ import App from "./App";
 
 const rootElement = document.getElementById("root");
 ReactDOM.render(
-  <React.StrictMode>
+  <React.Fragment>
     <BrowserRouter>
       <App />
     </BrowserRouter>
-  </React.StrictMode>,
+  </React.Fragment>,
   rootElement
 );
