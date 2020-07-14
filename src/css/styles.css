@@ -19,6 +19,7 @@ center {
   position: relative;
   border: 2px solid #d0d3d4;
   outline: none;
+  font-size: 15px;
 }
 
 .Keyboard {
@@ -46,24 +47,25 @@ center {
   top: 12vh;
   position: absolute;
   color: #2e86c1;
-  font-size: 20px;
+  font-size: 25px;
 }
 
 .btn-begin > span.timer {
   top: 12vh;
   position: absolute;
   color: #7f8c8d;
-  font-size: 15px;
+  font-size: 20px;
 }
 
 .btn-begin button {
   z-index: 99;
   width: 130px;
-  height: 30px;
+  height: 40px;
   top: 12vh;
   border-radius: 10%;
   position: absolute;
   color: white;
+  font-size: 15px;
   background-color: #2e86c1;
   border: none;
   cursor: pointer;
@@ -79,7 +81,7 @@ center {
   width: 80%;
   padding: 30px;
   line-height: 2;
-  font-size: 20px;
+  font-size: 25px;
 }
 
 span.typed {
@@ -143,8 +145,7 @@ span.typed {
 }
 
 .btn-group-verses {
-  padding-top: 10vh;
-  height: 100vh;
+  padding: 10vh 0;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
