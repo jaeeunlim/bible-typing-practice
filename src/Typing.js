@@ -25,6 +25,7 @@ class Typing extends React.Component {
       countDownBegin: false,
       verse: "",
       typed: "",
+      typedIncorrect: "",
       totalKeyStrokes: 0,
       countDown: 5,
       timeElapsed: 0,
@@ -41,13 +42,15 @@ class Typing extends React.Component {
   }
 
   componentDidMount() {
-    window.addEventListener("keypress", this.pressKey);
+    window.addEventListener("keypress", this.onKeyPress);
+    window.addEventListener("keydown", this.onKeyDown);
     this.setState({ verse: this.props.match.params.text });
     this.timerID = setInterval(() => this.tick(), 500);
   }
 
   componentWillUnmount() {
-    window.removeEventListener("keypress", this.pressKey);
+    window.removeEventListener("keypress", this.onKeyPress);
+    window.removeEventListener("keyDown", this.onKeyDown);
     clearInterval(this.timerID);
   }
 
@@ -58,6 +61,7 @@ class Typing extends React.Component {
       countDownBegin: false,
       verse: this.state.typed,
       typed: "",
+      typedIncorrect: "",
       totalKeyStrokes: 0,
       countDown: 5,
       timeElapsed: 0,
@@ -65,12 +69,51 @@ class Typing extends React.Component {
     });
   };
 
-  pressKey = event => {
+  onKeyDown = event => {
+    if (event.keyCode === 8) {
+      if (this.state.typeBegin) {
+        if (this.state.typedIncorrect.length > 0) {
+          var char =
+            this.state.typedIncorrect.substr(-1) === "_"
+              ? " "
+              : this.state.typedIncorrect.substr(-1);
+          this.setState({
+            verse: char.concat(this.state.verse),
+            typedIncorrect: this.state.typedIncorrect.substr(
+              0,
+              this.state.typedIncorrect.length - 1
+            )
+          });
+        } else if (this.state.typed.length > 0) {
+          this.setState({
+            verse: this.state.typed.substr(-1).concat(this.state.verse),
+            typed: this.state.typed.substr(0, this.state.typed.length - 1)
+          });
+        }
+      }
+    }
+  };
+
+  onKeyPress = event => {
     const letter = String.fromCharCode(event.keyCode);
     this.setState({
       totalKeyStrokes: this.state.totalKeyStrokes + 1
     });
-    if (mapSymbolToKey(this.state.verse.charAt(0)) === letter) {
+
+    if (
+      this.state.typeBegin &&
+      (this.state.typedIncorrect.length > 0 ||
+        mapSymbolToKey(this.state.verse.charAt(0)) !== letter)
+    ) {
+      var char = this.state.verse.charAt(0);
+      if (char === " ") {
+        char = "_";
+      }
+      this.setState({
+        typedIncorrect: this.state.typedIncorrect.concat(char),
+        verse: this.state.verse.substr(1, this.state.verse.length)
+      });
+    } else if (mapSymbolToKey(this.state.verse.charAt(0)) === letter) {
       if (!this.state.typeBegin && !this.state.countDownBegin) {
         this.setState({
           typeBegin: true,
@@ -274,7 +317,7 @@ class Typing extends React.Component {
   };
 
   render() {
-    const currChar =
+    const nextChar =
       this.state.typeBegin && !this.isVerseAllTyped()
         ? mapSymbolToKey(this.state.verse.charAt(0))
         : -1;
@@ -285,7 +328,11 @@ class Typing extends React.Component {
           {this.getVerseInfo()}
           <div id="begin">
             {this.getTypingManager()}
-            <BibleVerse typed={this.state.typed} verse={this.state.verse} />
+            <BibleVerse
+              typed={this.state.typed}
+              verse={this.state.verse}
+              typedIncorrect={this.state.typedIncorrect}
+            />
             <Editor show={this.state.showTextarea} />
           </div>
           <FingerColorCode />
@@ -295,7 +342,7 @@ class Typing extends React.Component {
             onClickShowTextarea={this.onClickShowTextarea}
             showTextarea={this.state.showTextarea}
           />
-          <Keyboard value={currChar} highlight={this.state.highlightKeys} />
+          <Keyboard value={nextChar} highlight={this.state.highlightKeys} />
         </div>
         {this.getSummary()}
       </React.Fragment>

@@ -8,6 +8,7 @@ export default class BibleVerse extends React.Component {
       <div className="BibleVerse">
         <p>
           <span id="typed">{this.props.typed}</span>
+          <span id="typed-incorrect">{this.props.typedIncorrect}</span>
           <span id="untyped">{this.props.verse}</span>
         </p>
       </div>

@@ -96,6 +96,13 @@ span#untyped {
   color: #aaaaaa;
 }
 
+span#typed-incorrect {
+  color: red;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  hyphens: auto;
+}
+
 .btn-group-bible {
   padding: 10vh 0;
   display: flex;
@@ -284,4 +291,9 @@ footer {
   padding: 30px;
   line-height: 2;
   font-size: 15px;
+  font-family: "Quicksand", sans-serif;
+}
+
+#text-incorrect {
+  color: red;
 }
