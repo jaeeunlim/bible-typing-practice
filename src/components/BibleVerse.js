@@ -7,8 +7,8 @@ export default class BibleVerse extends React.Component {
     return (
       <div className="BibleVerse">
         <p>
-          <span className="typed">{this.props.typed}</span>
-          {this.props.verse}
+          <span id="typed">{this.props.typed}</span>
+          <span id="untyped">{this.props.verse}</span>
         </p>
       </div>
     );

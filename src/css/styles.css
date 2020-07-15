@@ -88,8 +88,12 @@ center {
   font-size: 20px;
 }
 
-span.typed {
-  color: #2e86c1;
+span#typed {
+  color: #000000;
+}
+
+span#untyped {
+  color: #aaaaaa;
 }
 
 .btn-group-bible {
