@@ -6,12 +6,12 @@ import Dialog from "@material-ui/core/Dialog";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import { BsBookHalf } from "react-icons/bs";
-import { FaKey } from "react-icons/fa";
+import { FaPlay } from "react-icons/fa";
 import BibleVerse from "./components/BibleVerse";
 import Keyboard, { mapSymbolToKey } from "./components/Keyboard";
 import Switch from "@material-ui/core/Switch";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
-import FingerLabelsImg from "./images/finger-labels.jpg";
+import FingerColorCode from "./components/FingerColorCode";
 
 import "./css/styles.css";
 
@@ -27,7 +27,6 @@ class Typing extends React.Component {
       countDown: 5,
       timeElapsed: 0,
       endOfBible: false,
-      hint: false,
       highlightKeys: true
     };
   }
@@ -58,8 +57,7 @@ class Typing extends React.Component {
       typed: "",
       countDown: 5,
       timeElapsed: 0,
-      endOfBible: false,
-      hint: false
+      endOfBible: false
     });
   };
 
@@ -145,7 +143,11 @@ class Typing extends React.Component {
         );
       }
     } else {
-      return <button onClick={this.onClickBegin}>BEGIN TYPING</button>;
+      return (
+        <button onClick={this.onClickBegin}>
+          <FaPlay size={17} />
+        </button>
+      );
     }
   };
 
@@ -213,36 +215,6 @@ class Typing extends React.Component {
     this.setState({ highlightKeys: !this.state.highlightKeys });
   };
 
-  exitHint = () => {
-    this.setState({ hint: false });
-  };
-
-  onClickHint = () => {
-    this.setState({ hint: true });
-  };
-
-  getHint = () => {
-    if (this.state.hint) {
-      return (
-        <Dialog open={this.state.hint}>
-          <DialogTitle>
-            <center>Finger Color Code</center>
-          </DialogTitle>
-          <DialogContent>
-            <center>
-              <img id="img-hands" src={FingerLabelsImg} alt="Finger Labels" />
-            </center>
-            <center>
-              <Button size="small" onClick={this.exitHint}>
-                Exit
-              </Button>
-            </center>
-          </DialogContent>
-        </Dialog>
-      );
-    }
-  };
-
   isVerseAllTyped = () => {
     return this.state.verse.length <= 0;
   };
@@ -254,16 +226,14 @@ class Typing extends React.Component {
         : -1;
 
     return (
-      <>
+      <React.Fragment>
         <div className="Typing">
           {this.getVerseInfo()}
           <div className="btn-begin">
             {this.getTypingManager()}
             <BibleVerse typed={this.state.typed} verse={this.state.verse} />
           </div>
-          <Button id="btn-hint" onClick={this.onClickHint}>
-            <FaKey />
-          </Button>
+          <FingerColorCode />
           <FormControlLabel
             id="btn-highlight"
             control={
@@ -278,9 +248,8 @@ class Typing extends React.Component {
           />
           <Keyboard value={currChar} highlight={this.state.highlightKeys} />
         </div>
-        {this.getHint()}
         {this.getSummary()}
-      </>
+      </React.Fragment>
     );
   }
 }

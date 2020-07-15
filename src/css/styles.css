@@ -12,18 +12,14 @@ center {
   font-family: "Quicksand", sans-serif;
 }
 
-.Typing {
-  min-height: 100vh;
-}
-
 .Key {
   height: 6vh;
   border-radius: 10%;
   margin: 0.5%;
   position: relative;
   border: 3px solid #d0d3d4;
-  outline: none;
   font-size: 15px;
+  outline: none;
 }
 
 .Keyboard {
@@ -41,6 +37,10 @@ center {
   position: relative;
 }
 
+.Typing {
+  min-height: 100vh;
+}
+
 .btn-begin {
   display: flex;
   justify-content: center;
@@ -48,14 +48,14 @@ center {
 }
 
 .btn-begin > span.countdown {
-  top: 12vh;
+  top: 35px;
   position: absolute;
-  color: #2e86c1;
+  color: #e74c3c;
   font-size: 25px;
 }
 
 .btn-begin > span.timer {
-  top: 12vh;
+  top: 35px;
   position: absolute;
   color: #7f8c8d;
   font-size: 20px;
@@ -63,29 +63,29 @@ center {
 
 .btn-begin button {
   z-index: 99;
-  width: 130px;
+  width: 40px;
   height: 40px;
-  top: 12vh;
-  border-radius: 10%;
+  top: 35px;
+  border-radius: 50%;
   position: absolute;
   color: white;
-  font-size: 15px;
-  background-color: #2e86c1;
+  background-color: #e74c3c;
   border: none;
   cursor: pointer;
+  font-size: 15px;
 }
 
 .btn-begin > button:hover {
-  background-color: #aed6f1;
+  background-color: #f5b7b1;
 }
 
 .BibleVerse {
   position: absolute;
-  top: 15vh;
+  top: 7vh;
   width: 80%;
   padding: 30px;
   line-height: 2;
-  font-size: 25px;
+  font-size: 20px;
 }
 
 span.typed {
@@ -210,22 +210,26 @@ span.typed {
 
 #btn-hint {
   position: absolute;
-  top: 45vh;
+  top: 48vh;
   left: 5vw;
   color: #d4ac0d;
   border-radius: 50%;
+}
+
+#btn-highlight {
+  position: absolute;
+  top: 48vh;
+  right: 7vw;
+  font-size: 5px;
+  color: #777777;
 }
 
 #img-hands {
   width: 300px;
 }
 
-#btn-highlight {
-  position: absolute;
-  top: 45vh;
-  right: 5vw;
-  font-size: 5px;
-  color: #777777;
+#tooltip-hint {
+  background-color: white;
 }
 
 footer {
@@ -236,5 +240,5 @@ footer {
   text-align: center;
   font-size: 15px;
   color: #777777;
-  background-color: #000000;
+  background-color: black;
 }
