@@ -25,6 +25,7 @@ class Typing extends React.Component {
       countDownBegin: false,
       verse: "",
       typed: "",
+      totalKeyStrokes: 0,
       countDown: 5,
       timeElapsed: 0,
       endOfBible: false,
@@ -57,6 +58,7 @@ class Typing extends React.Component {
       countDownBegin: false,
       verse: this.state.typed,
       typed: "",
+      totalKeyStrokes: 0,
       countDown: 5,
       timeElapsed: 0,
       endOfBible: false
@@ -65,6 +67,9 @@ class Typing extends React.Component {
 
   pressKey = event => {
     const letter = String.fromCharCode(event.keyCode);
+    this.setState({
+      totalKeyStrokes: this.state.totalKeyStrokes + 1
+    });
     if (mapSymbolToKey(this.state.verse.charAt(0)) === letter) {
       if (!this.state.typeBegin && !this.state.countDownBegin) {
         this.setState({
@@ -86,6 +91,20 @@ class Typing extends React.Component {
     return Math.round(
       ((this.state.typed.length / 5.0) * 60.0) / this.state.timeElapsed
     );
+  };
+
+  getAccuracy = () => {
+    return Math.round(
+      (this.state.typed.length / this.state.totalKeyStrokes) * 100.0
+    );
+  };
+
+  getMinutes = () => {
+    return Math.floor((this.state.timeElapsed + 0.5) / 60);
+  };
+
+  getSeconds = () => {
+    return Math.round(this.state.timeElapsed) % 60;
   };
 
   goToNextVerse = () => {
@@ -197,18 +216,30 @@ class Typing extends React.Component {
       return (
         <Dialog open={this.state.typeFinished}>
           <DialogTitle>
-            <center>Your speed is {this.getSpeed()} WPM</center>
+            <center>
+              Your speed is <b>{this.getSpeed()} WPM</b>
+            </center>
+            <center>
+              Your accuracy is <b>{this.getAccuracy()} %</b>
+            </center>
           </DialogTitle>
           <DialogContent>
-            <Button color="secondary" size="small" onClick={this.reset}>
-              Retry
-            </Button>
-            <Button color="primary" size="small" onClick={this.goToNextVerse}>
-              Next Verse
-            </Button>
-            <Button size="small" onClick={goToScripturesPage(this.props)}>
-              Scriptures
-            </Button>
+            <center>
+              Your typed for {this.getMinutes()} minutes and {this.getSeconds()}{" "}
+              seconds
+            </center>
+            <br />
+            <center>
+              <Button color="secondary" size="small" onClick={this.reset}>
+                Retry
+              </Button>
+              <Button color="primary" size="small" onClick={this.goToNextVerse}>
+                Next Verse
+              </Button>
+              <Button size="small" onClick={goToScripturesPage(this.props)}>
+                Scriptures
+              </Button>
+            </center>
           </DialogContent>
         </Dialog>
       );
