@@ -9,6 +9,8 @@ import { BsBookHalf } from "react-icons/bs";
 import { FaKey } from "react-icons/fa";
 import BibleVerse from "./components/BibleVerse";
 import Keyboard, { mapSymbolToKey } from "./components/Keyboard";
+import Switch from "@material-ui/core/Switch";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
 import FingerLabelsImg from "./images/finger-labels.jpg";
 
 import "./css/styles.css";
@@ -25,7 +27,8 @@ class Typing extends React.Component {
       countDown: 5,
       timeElapsed: 0,
       endOfBible: false,
-      hint: false
+      hint: false,
+      highlightKeys: true
     };
   }
 
@@ -206,6 +209,10 @@ class Typing extends React.Component {
     );
   };
 
+  onClickHighlight = () => {
+    this.setState({ highlightKeys: !this.state.highlightKeys });
+  };
+
   exitHint = () => {
     this.setState({ hint: false });
   };
@@ -223,11 +230,7 @@ class Typing extends React.Component {
           </DialogTitle>
           <DialogContent>
             <center>
-              <img
-                id="img-hands"
-                src={FingerLabelsImg}
-                alt="Finger Labels"
-              />
+              <img id="img-hands" src={FingerLabelsImg} alt="Finger Labels" />
             </center>
             <center>
               <Button size="small" onClick={this.exitHint}>
@@ -261,7 +264,19 @@ class Typing extends React.Component {
           <Button id="btn-hint" onClick={this.onClickHint}>
             <FaKey />
           </Button>
-          <Keyboard value={currChar} />
+          <FormControlLabel
+            id="btn-highlight"
+            control={
+              <Switch
+                size="small"
+                checked={this.state.highlightKeys}
+                onChange={this.onClickHighlight}
+              />
+            }
+            label="HIGHLIGHT KEYS"
+            labelPlacement="start"
+          />
+          <Keyboard value={currChar} highlight={this.state.highlightKeys} />
         </div>
         {this.getHint()}
         {this.getSummary()}

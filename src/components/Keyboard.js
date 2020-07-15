@@ -7,9 +7,9 @@ const TOTALKEYS = 63;
 
 const BackgroundColor = {
   ROW0: [
-    "#EC7063",
-    "#EC7063",
-    "#F39C12",
+    "#F1948A",
+    "#F1948A",
+    "#F5B041",
     "#F7DC6F",
     "#ABEBC6",
     "#ABEBC6",
@@ -23,9 +23,9 @@ const BackgroundColor = {
     "#BB8FCE"
   ],
   ROW1: [
-    "#EC7063",
-    "#EC7063",
-    "#F39C12",
+    "#F1948A",
+    "#F1948A",
+    "#F5B041",
     "#F7DC6F",
     "#ABEBC6",
     "#ABEBC6",
@@ -39,9 +39,9 @@ const BackgroundColor = {
     "#BB8FCE"
   ],
   ROW2: [
-    "#EC7063",
-    "#EC7063",
-    "#F39C12",
+    "#F1948A",
+    "#F1948A",
+    "#F5B041",
     "#F7DC6F",
     "#ABEBC6",
     "#ABEBC6",
@@ -54,9 +54,9 @@ const BackgroundColor = {
     "#BB8FCE"
   ],
   ROW3: [
-    "#EC7063",
-    "#EC7063",
-    "#F39C12",
+    "#F1948A",
+    "#F1948A",
+    "#F5B041",
     "#F7DC6F",
     "#ABEBC6",
     "#ABEBC6",
@@ -338,12 +338,25 @@ export default class Keyboard extends React.Component {
     super(props);
     this.state = {
       borderColors: Array(TOTALKEYS).fill("#d0d3d4"),
-      prevKey: -1
+      prevKey: -1,
+      highlightKeys: true
     };
   }
 
-  componentDidUpdate() {
-    if (this.props.value !== -1 && this.props.value !== this.state.prevKey) {
+  componentDidUpdate(prevProps) {
+    if (prevProps.highlight !== this.props.highlight) {
+      const borderColors = this.getUnhighlightedBorderColors();
+      this.setState({
+        highlightKeys: this.props.highlight,
+        borderColors: borderColors
+      });
+    }
+
+    if (
+      this.state.highlightKeys &&
+      this.props.value !== -1 &&
+      this.props.value !== this.state.prevKey
+    ) {
       const newBorderColors = this.getUnhighlightedBorderColors();
       for (var j of KeyMap[this.props.value]) {
         newBorderColors[j] = "red"; // highlight current key

@@ -21,7 +21,7 @@ center {
   border-radius: 10%;
   margin: 0.5%;
   position: relative;
-  border: 2px solid #d0d3d4;
+  border: 3px solid #d0d3d4;
   outline: none;
   font-size: 15px;
 }
@@ -171,7 +171,7 @@ span.typed {
 }
 
 .btn-group-verses .verse-wrap .btn-verse {
-  height: 6vh;
+  height: 5vh;
   display: flex;
   align-items: center;
   text-align: center;
@@ -213,18 +213,28 @@ span.typed {
   top: 45vh;
   left: 5vw;
   color: #d4ac0d;
+  border-radius: 50%;
 }
 
 #img-hands {
   width: 300px;
 }
 
+#btn-highlight {
+  position: absolute;
+  top: 45vh;
+  right: 5vw;
+  font-size: 5px;
+  color: #777777;
+}
+
 footer {
   width: 100%;
   padding: 5px;
+  top: -28px;
   position: relative;
   text-align: center;
   font-size: 15px;
-  color: #5d6d7e;
-  background-color: #273746;
+  color: #777777;
+  background-color: #000000;
 }
