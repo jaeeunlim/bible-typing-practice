@@ -214,18 +214,44 @@ span#untyped {
 
 #btn-hint {
   position: absolute;
+  width: 30px;
+  height: 30px;
   top: 48vh;
-  left: 5vw;
+  right: 120px;
   color: #d4ac0d;
+  border: none;
   border-radius: 50%;
+  outline: none;
+  background-color: white;
 }
 
-#btn-highlight {
+#btn-hint:hover {
+  background-color: #eeeeee;
+}
+
+#btn-settings {
   position: absolute;
+  width: 30px;
+  height: 30px;
   top: 48vh;
-  right: 7vw;
+  right: 80px;
+  color: #777777;
+  border: none;
+  border-radius: 50%;
+  outline: none;
+  font-size: 20px;
+  background-color: white;
+}
+
+#btn-settings:hover {
+  cursor: pointer;
+  background-color: #eeeeee;
+}
+
+#btn-control {
   font-size: 5px;
   color: #777777;
+  margin: 0 0 30px 0;
 }
 
 #img-hands {

@@ -9,9 +9,8 @@ import { BsBookHalf } from "react-icons/bs";
 import { FaPlay } from "react-icons/fa";
 import BibleVerse from "./components/BibleVerse";
 import Keyboard, { mapSymbolToKey } from "./components/Keyboard";
-import Switch from "@material-ui/core/Switch";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
 import FingerColorCode from "./components/FingerColorCode";
+import Settings from "./components/Settings";
 import { LargeTooltip } from "./components/Tooltip";
 import Editor from "./components/Editor";
 
@@ -29,7 +28,8 @@ class Typing extends React.Component {
       countDown: 5,
       timeElapsed: 0,
       endOfBible: false,
-      highlightKeys: true
+      highlightKeys: true,
+      showTextarea: true
     };
   }
 
@@ -66,17 +66,19 @@ class Typing extends React.Component {
   pressKey = event => {
     const letter = String.fromCharCode(event.keyCode);
     if (mapSymbolToKey(this.state.verse.charAt(0)) === letter) {
-      if (!this.state.typeBegin) {
+      if (!this.state.typeBegin && !this.state.countDownBegin) {
         this.setState({
           typeBegin: true,
           countDownBegin: true,
           countDown: -1
         });
       }
-      this.setState({
-        typed: this.state.typed.concat(letter),
-        verse: this.state.verse.substr(1, this.state.verse.length)
-      });
+      if (this.state.typeBegin) {
+        this.setState({
+          typed: this.state.typed.concat(letter),
+          verse: this.state.verse.substr(1, this.state.verse.length)
+        });
+      }
     }
   };
 
@@ -232,25 +234,12 @@ class Typing extends React.Component {
     this.setState({ highlightKeys: !this.state.highlightKeys });
   };
 
-  isVerseAllTyped = () => {
-    return this.state.verse.length <= 0;
+  onClickShowTextarea = () => {
+    this.setState({ showTextarea: !this.state.showTextarea });
   };
 
-  getHighlightKeysControl = () => {
-    return (
-      <FormControlLabel
-        id="btn-highlight"
-        control={
-          <Switch
-            size="small"
-            checked={this.state.highlightKeys}
-            onChange={this.onClickHighlight}
-          />
-        }
-        label="HIGHLIGHT KEYS"
-        labelPlacement="start"
-      />
-    );
+  isVerseAllTyped = () => {
+    return this.state.verse.length <= 0;
   };
 
   render() {
@@ -266,10 +255,15 @@ class Typing extends React.Component {
           <div id="begin">
             {this.getTypingManager()}
             <BibleVerse typed={this.state.typed} verse={this.state.verse} />
-            <Editor />
+            <Editor show={this.state.showTextarea} />
           </div>
           <FingerColorCode />
-          {this.getHighlightKeysControl()}
+          <Settings
+            onClickHighlight={this.onClickHighlight}
+            highlightKeys={this.state.highlightKeys}
+            onClickShowTextarea={this.onClickShowTextarea}
+            showTextarea={this.state.showTextarea}
+          />
           <Keyboard value={currChar} highlight={this.state.highlightKeys} />
         </div>
         {this.getSummary()}

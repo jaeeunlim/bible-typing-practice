@@ -1,6 +1,5 @@
 import React from "react";
 import { FaKey } from "react-icons/fa";
-import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import { LightTooltip } from "./Tooltip";
 import FingerLabelsImg from "../images/finger-labels.jpg";
@@ -15,11 +14,11 @@ export default class FingerColorCode extends React.Component {
             <img id="img-hands" src={FingerLabelsImg} alt="Finger Labels" />
           </React.Fragment>
         }
-        placement="right"
+        placement="left"
       >
-        <Button id="btn-hint">
+        <button id="btn-hint">
           <FaKey />
-        </Button>
+        </button>
       </LightTooltip>
     );
   }
