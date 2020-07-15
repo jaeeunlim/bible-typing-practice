@@ -12,8 +12,18 @@ import Keyboard, { mapSymbolToKey } from "./components/Keyboard";
 import Switch from "@material-ui/core/Switch";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import FingerColorCode from "./components/FingerColorCode";
+import Tooltip from "@material-ui/core/Tooltip";
+import { withStyles } from "@material-ui/core/styles";
 
 import "./css/styles.css";
+
+const LargeTooltip = withStyles(theme => ({
+  tooltip: {
+    fontSize: 20,
+    fontWeight: 1,
+    textAlign: "center"
+  }
+}))(Tooltip);
 
 class Typing extends React.Component {
   constructor(props) {
@@ -62,14 +72,19 @@ class Typing extends React.Component {
   };
 
   pressKey = event => {
-    if (this.state.typeBegin) {
-      const letter = String.fromCharCode(event.keyCode);
-      if (mapSymbolToKey(this.state.verse.charAt(0)) === letter) {
+    const letter = String.fromCharCode(event.keyCode);
+    if (mapSymbolToKey(this.state.verse.charAt(0)) === letter) {
+      if (!this.state.typeBegin) {
         this.setState({
-          typed: this.state.typed.concat(letter),
-          verse: this.state.verse.substr(1, this.state.verse.length)
+          typeBegin: true,
+          countDownBegin: true,
+          countDown: -1
         });
       }
+      this.setState({
+        typed: this.state.typed.concat(letter),
+        verse: this.state.verse.substr(1, this.state.verse.length)
+      });
     }
   };
 
@@ -144,9 +159,19 @@ class Typing extends React.Component {
       }
     } else {
       return (
-        <button onClick={this.onClickBegin}>
-          <FaPlay size={17} />
-        </button>
+        <LargeTooltip
+          title={
+            <p>
+              Click to begin timer with a countdown. Or type first character to
+              begin timer automatically.
+            </p>
+          }
+          arrow
+        >
+          <button onClick={this.onClickBegin}>
+            <FaPlay size={17} />
+          </button>
+        </LargeTooltip>
       );
     }
   };
@@ -219,6 +244,23 @@ class Typing extends React.Component {
     return this.state.verse.length <= 0;
   };
 
+  getHighlightKeysControl = () => {
+    return (
+      <FormControlLabel
+        id="btn-highlight"
+        control={
+          <Switch
+            size="small"
+            checked={this.state.highlightKeys}
+            onChange={this.onClickHighlight}
+          />
+        }
+        label="HIGHLIGHT KEYS"
+        labelPlacement="start"
+      />
+    );
+  };
+
   render() {
     const currChar =
       this.state.typeBegin && !this.isVerseAllTyped()
@@ -234,18 +276,7 @@ class Typing extends React.Component {
             <BibleVerse typed={this.state.typed} verse={this.state.verse} />
           </div>
           <FingerColorCode />
-          <FormControlLabel
-            id="btn-highlight"
-            control={
-              <Switch
-                size="small"
-                checked={this.state.highlightKeys}
-                onChange={this.onClickHighlight}
-              />
-            }
-            label="HIGHLIGHT KEYS"
-            labelPlacement="start"
-          />
+          {this.getHighlightKeysControl()}
           <Keyboard value={currChar} highlight={this.state.highlightKeys} />
         </div>
         {this.getSummary()}
