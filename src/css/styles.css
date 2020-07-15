@@ -41,27 +41,27 @@ center {
   min-height: 100vh;
 }
 
-.btn-begin {
+#begin {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.btn-begin > span.countdown {
+#begin > span.countdown {
   top: 35px;
   position: absolute;
   color: #e74c3c;
   font-size: 25px;
 }
 
-.btn-begin > span.timer {
+#begin > span.timer {
   top: 35px;
   position: absolute;
   color: #7f8c8d;
   font-size: 20px;
 }
 
-.btn-begin button {
+#begin button {
   z-index: 99;
   width: 40px;
   height: 40px;
@@ -75,13 +75,13 @@ center {
   font-size: 15px;
 }
 
-.btn-begin > button:hover {
+#begin > button:hover {
   background-color: #f5b7b1;
 }
 
 .BibleVerse {
   position: absolute;
-  top: 7vh;
+  top: 5vh;
   width: 80%;
   padding: 30px;
   line-height: 2;
@@ -245,4 +245,17 @@ footer {
   font-size: 15px;
   color: #777777;
   background-color: black;
+}
+
+#editor {
+  background-color: #f2f4f4;
+  border: 1px solid #bdc3c7;
+  outline: none;
+  position: absolute;
+  top: 28vh;
+  width: 80%;
+  height: 10vh;
+  padding: 30px;
+  line-height: 2;
+  font-size: 15px;
 }

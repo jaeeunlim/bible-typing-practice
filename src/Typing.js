@@ -12,18 +12,10 @@ import Keyboard, { mapSymbolToKey } from "./components/Keyboard";
 import Switch from "@material-ui/core/Switch";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import FingerColorCode from "./components/FingerColorCode";
-import Tooltip from "@material-ui/core/Tooltip";
-import { withStyles } from "@material-ui/core/styles";
+import { LargeTooltip } from "./components/Tooltip";
+import Editor from "./components/Editor";
 
 import "./css/styles.css";
-
-const LargeTooltip = withStyles(theme => ({
-  tooltip: {
-    fontSize: 20,
-    fontWeight: 1,
-    textAlign: "center"
-  }
-}))(Tooltip);
 
 class Typing extends React.Component {
   constructor(props) {
@@ -271,9 +263,10 @@ class Typing extends React.Component {
       <React.Fragment>
         <div className="Typing">
           {this.getVerseInfo()}
-          <div className="btn-begin">
+          <div id="begin">
             {this.getTypingManager()}
             <BibleVerse typed={this.state.typed} verse={this.state.verse} />
+            <Editor />
           </div>
           <FingerColorCode />
           {this.getHighlightKeysControl()}
