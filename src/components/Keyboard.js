@@ -317,7 +317,8 @@ const KeyMap = {
   ".": [50],
   "?": [51, 41],
   "/": [51],
-  " ": [57]
+  " ": [57],
+  del: [13]
 };
 
 export const mapSymbolToKey = symbol => {

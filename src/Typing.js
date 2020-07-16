@@ -59,7 +59,7 @@ class Typing extends React.Component {
       typeBegin: false,
       typeFinished: false,
       countDownBegin: false,
-      verse: this.state.typed,
+      verse: this.props.match.params.text,
       typed: "",
       typedIncorrect: "",
       totalKeyStrokes: 0,
@@ -316,12 +316,17 @@ class Typing extends React.Component {
     return this.state.verse.length <= 0;
   };
 
-  render() {
-    const nextChar =
-      this.state.typeBegin && !this.isVerseAllTyped()
-        ? mapSymbolToKey(this.state.verse.charAt(0))
-        : -1;
+  getNextchar = () => {
+    if (this.state.typedIncorrect.length > 0) {
+      return "del";
+    }
 
+    return this.state.typeBegin && !this.isVerseAllTyped()
+      ? mapSymbolToKey(this.state.verse.charAt(0))
+      : -1;
+  };
+
+  render() {
     return (
       <React.Fragment>
         <div className="Typing">
@@ -342,7 +347,10 @@ class Typing extends React.Component {
             onClickShowTextarea={this.onClickShowTextarea}
             showTextarea={this.state.showTextarea}
           />
-          <Keyboard value={nextChar} highlight={this.state.highlightKeys} />
+          <Keyboard
+            value={this.getNextchar()}
+            highlight={this.state.highlightKeys}
+          />
         </div>
         {this.getSummary()}
       </React.Fragment>
