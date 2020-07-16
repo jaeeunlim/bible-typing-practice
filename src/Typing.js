@@ -326,6 +326,18 @@ class Typing extends React.Component {
       : -1;
   };
 
+  getResetButton = () => {
+    if (this.state.typeBegin) {
+      return (
+        <Button id="btn-reset" onClick={this.reset}>
+          reset
+        </Button>
+      );
+    } else {
+      return <></>;
+    }
+  };
+
   render() {
     return (
       <React.Fragment>
@@ -340,6 +352,7 @@ class Typing extends React.Component {
             />
             <Editor show={this.state.showTextarea} />
           </div>
+          {this.getResetButton()}
           <FingerColorCode />
           <Settings
             onClickHighlight={this.onClickHighlight}

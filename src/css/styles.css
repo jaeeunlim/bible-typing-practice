@@ -261,6 +261,12 @@ span#typed-incorrect {
   margin: 0 0 30px 0;
 }
 
+#btn-reset {
+  position: absolute;
+  top: 47.5vh;
+  right: 150px;
+}
+
 #img-hands {
   width: 300px;
 }
