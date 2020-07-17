@@ -75,13 +75,36 @@ export const newTestamentChapters = {
   Revelation: 22
 };
 
-const getVerses = verse => verse.text.substr(0, verse.text.length - 1); // remove enter at the end
+const getVersesBibleAPI = verse => verse.text.substr(0, verse.text.length - 1); // remove enter at the end
 
-export const fetchBibleVerses = async (book, chapter) => {
+export const fetchBibleVersesBibleAPI = async (book, chapter) => {
   try {
     var response = await fetch(`https://bible-api.com/${book}%20${chapter}`);
     var { verses } = await response.json();
-    return verses.map(getVerses);
+    return verses.map(getVersesBibleAPI);
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+const getVerses = chapter => {
+  var verses = [];
+  Object.keys(chapter).forEach(function(key) {
+    var text = chapter[key].verse;
+    verses.push(text.substr(0, text.length - 2)); // remove enter at the end
+  });
+  return verses;
+};
+
+export const fetchBibleVerses = async (book, chap) => {
+  try {
+    var proxyURL = "https://evening-retreat-30371.herokuapp.com/";
+    var response = await fetch(
+      proxyURL + `https://getbible.net/json?v=web&passage=${book}%20${chap}`
+    );
+    var text = await response.text();
+    var { chapter } = JSON.parse(text.substr(1, text.length - 3));
+    return getVerses(chapter);
   } catch (e) {
     console.log(e);
   }
