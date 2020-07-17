@@ -101,11 +101,23 @@ export default class Scriptures extends React.Component {
   };
 
   getBackButton = () => {
+    var button = ShowType.TESTAMENTS;
+    switch (this.state.show) {
+      case ShowType.CHAPTERS:
+        button = ShowType.BOOKS;
+        break;
+      case ShowType.VERSES:
+        button = ShowType.CHAPTERS;
+        break;
+      default:
+        break;
+    }
+
     return (
       <div className="btn-back">
         <Button onClick={this.onClickBack}>
           <BsArrowLeftShort size={20} />
-          <span>&nbsp;back</span>
+          <span>&nbsp;{button}</span>
         </Button>
       </div>
     );
@@ -178,14 +190,16 @@ export default class Scriptures extends React.Component {
           onClick={this.onClickChapter(chapter)}
           key={chapter}
         >
-          Chapter {chapter}
+          {chapter}
         </button>
       );
     }
     return (
       <div className="btn-group-bible">
-        {this.getBackButton()}
-        {chapters}
+        <div className="chapter-wrap">
+          {this.getBackButton()}
+          {chapters}
+        </div>
       </div>
     );
   };
