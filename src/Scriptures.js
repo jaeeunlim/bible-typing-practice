@@ -10,6 +10,7 @@ import {
   fetchBibleVerses,
   Testament
 } from "./utils/bibleAPI";
+import Loading from "./components/Loading";
 
 import "./css/styles.css";
 
@@ -28,7 +29,8 @@ export default class Scriptures extends React.Component {
       show: ShowType.TESTAMENTS,
       book: "",
       chapter: 0,
-      bibleVerses: []
+      bibleVerses: [],
+      loadingVerses: true
     };
   }
 
@@ -38,7 +40,8 @@ export default class Scriptures extends React.Component {
       show: ShowType.TESTAMENTS,
       book: "",
       chapter: 0,
-      bibleVerses: []
+      bibleVerses: [],
+      loadingVerses: true
     });
   };
 
@@ -92,7 +95,8 @@ export default class Scriptures extends React.Component {
         this.setState({
           show: ShowType.CHAPTERS,
           chapter: 0,
-          bibleVerses: []
+          bibleVerses: [],
+          loadingVerses: true
         });
         break;
       default:
@@ -206,8 +210,8 @@ export default class Scriptures extends React.Component {
 
   getVerseButtons = () => {
     if (this.state.bibleVerses.length === 0) {
-      fetchBibleVerses(this.state.book, this.state.chapter).then(
-        fetchedVerses => {
+      fetchBibleVerses(this.state.book, this.state.chapter)
+        .then(fetchedVerses => {
           this.setState({
             bibleVerses: (
               <List
@@ -236,9 +240,12 @@ export default class Scriptures extends React.Component {
               </List>
             )
           });
-        }
-      );
+        })
+        .then(() => {
+          this.setState({ loadingVerses: false });
+        });
     }
+
     return (
       <div className="btn-group-verses">
         {this.getBackButton()}
@@ -256,7 +263,9 @@ export default class Scriptures extends React.Component {
       case ShowType.CHAPTERS:
         return this.getChapterButtons();
       case ShowType.VERSES:
-        return this.getVerseButtons();
+        const verses = this.getVerseButtons();
+        const text = this.state.book + " " + this.state.chapter;
+        return this.state.loadingVerses ? <Loading text={text} /> : verses;
       default:
         return this.getTestamentButtons();
     }

@@ -103,6 +103,20 @@ span#typed-incorrect {
   hyphens: auto;
 }
 
+span#loader-text {
+  font-size: 25px;
+  font-weight: 2px;
+  color: #5d6d7e;
+}
+
+#loader-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+
 .btn-group-bible {
   margin: 0 5vw;
   padding: 5vw 0;
@@ -110,7 +124,7 @@ span#typed-incorrect {
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
-  min-height: 90vh;
+  min-height: 92vh;
 }
 
 .btn-group-bible .btn-testament {
