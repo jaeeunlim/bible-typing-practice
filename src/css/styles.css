@@ -124,7 +124,7 @@ span#loader-text {
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
-  min-height: 92vh;
+  min-height: 100vh;
 }
 
 .btn-group-bible .btn-testament {
@@ -167,6 +167,14 @@ span#loader-text {
   cursor: pointer;
 }
 
+.btn-group-chapters {
+  margin: 0 5vw;
+  padding: 6vw 0;
+  align-items: top;
+  justify-content: center;
+  min-height: 100vh;
+}
+
 .chapter-wrap {
   display: flex;
   flex-wrap: wrap;
@@ -174,9 +182,9 @@ span#loader-text {
   justify-content: center;
 }
 
-.btn-group-bible .btn-chapter {
+.chapter-wrap .btn-chapter {
   margin: 20px;
-  width: 7vw;
+  width: 5vw;
   height: 7vh;
   background-color: #5d6d7e;
   box-shadow: 5px 5px #273746;
@@ -186,7 +194,7 @@ span#loader-text {
   outline: none;
 }
 
-.btn-group-bible .btn-chapter:hover {
+.chapter-wrap .btn-chapter:hover {
   background-color: #f1948a;
   box-shadow: 5px 5px #273746;
   color: #5d6d7e;
@@ -336,4 +344,18 @@ footer {
 
 #text-incorrect {
   color: red;
+}
+
+#language-menu {
+  position: absolute;
+  top: 33px;
+  left: 80px;
+}
+
+#btn-language {
+  z-index: 99;
+  display: flex;
+  align-items: center;
+  width: 30px;
+  height: 30px;
 }

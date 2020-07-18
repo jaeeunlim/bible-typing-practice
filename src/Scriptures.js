@@ -11,6 +11,14 @@ import {
   Testament
 } from "./utils/bibleAPI";
 import Loading from "./components/Loading";
+import {
+  BibleVersion,
+  Testament as TestamentTranslation,
+  ShowType as ShowTypeTranslation,
+  OldTestamentBooks,
+  NewTestamentBooks,
+  Type
+} from "./utils/translations";
 
 import "./css/styles.css";
 
@@ -32,6 +40,15 @@ export default class Scriptures extends React.Component {
       bibleVerses: [],
       loadingVerses: true
     };
+  }
+
+  componentDidUpdate(prevProps) {
+    if (
+      prevProps.language !== this.props.language &&
+      this.state.show === ShowType.VERSES
+    ) {
+      this.setState({ loadingVerses: true, bibleVerses: [] });
+    }
   }
 
   reset = () => {
@@ -105,13 +122,13 @@ export default class Scriptures extends React.Component {
   };
 
   getBackButton = () => {
-    var button = ShowType.TESTAMENTS;
+    var button = ShowTypeTranslation[this.props.language].TESTAMENTS;
     switch (this.state.show) {
       case ShowType.CHAPTERS:
-        button = ShowType.BOOKS;
+        button = ShowTypeTranslation[this.props.language].BOOKS;
         break;
       case ShowType.VERSES:
-        button = ShowType.CHAPTERS;
+        button = ShowTypeTranslation[this.props.language].CHAPTERS;
         break;
       default:
         break;
@@ -137,7 +154,7 @@ export default class Scriptures extends React.Component {
           <GiSecretBook size={30} />
           <br />
           <br />
-          Old Testament
+          {TestamentTranslation[this.props.language].OLD}
         </button>
         <button
           className="btn-testament"
@@ -146,7 +163,7 @@ export default class Scriptures extends React.Component {
           <GiSecretBook size={30} />
           <br />
           <br />
-          New Testament
+          {TestamentTranslation[this.props.language].NEW}
         </button>
       </div>
     );
@@ -156,8 +173,8 @@ export default class Scriptures extends React.Component {
     const books = [];
     const testament =
       this.state.testament === Testament.NEW
-        ? newTestamentChapters
-        : oldTestamentChapters;
+        ? NewTestamentBooks[this.props.language]
+        : OldTestamentBooks[this.props.language];
     for (var name in testament) {
       books.push(
         <button
@@ -165,7 +182,7 @@ export default class Scriptures extends React.Component {
           className="btn-book"
           onClick={this.onClickBook(name)}
         >
-          {name}
+          {testament[name]}
         </button>
       );
     }
@@ -199,7 +216,7 @@ export default class Scriptures extends React.Component {
       );
     }
     return (
-      <div className="btn-group-bible">
+      <div className="btn-group-chapters">
         <div className="chapter-wrap">
           {this.getBackButton()}
           {chapters}
@@ -210,7 +227,11 @@ export default class Scriptures extends React.Component {
 
   getVerseButtons = () => {
     if (this.state.bibleVerses.length === 0) {
-      fetchBibleVerses(this.state.book, this.state.chapter)
+      fetchBibleVerses(
+        this.state.book,
+        this.state.chapter,
+        BibleVersion[this.props.language]
+      )
         .then(fetchedVerses => {
           this.setState({
             bibleVerses: (
@@ -220,7 +241,7 @@ export default class Scriptures extends React.Component {
                   window.innerHeight || 0
                 )}
                 itemCount={fetchedVerses.length}
-                itemSize={100}
+                itemSize={80}
                 width="100%"
               >
                 {({ index, style }) => (
@@ -229,7 +250,7 @@ export default class Scriptures extends React.Component {
                       className="btn-verse"
                       onClick={this.onClickVerse(index, fetchedVerses[index])}
                     >
-                      Type
+                      {Type[this.props.language]}
                     </button>
                     <p>
                       {this.state.chapter}:{parseInt(index, 10) + 1}{" "}
@@ -264,7 +285,11 @@ export default class Scriptures extends React.Component {
         return this.getChapterButtons();
       case ShowType.VERSES:
         const verses = this.getVerseButtons();
-        const text = this.state.book + " " + this.state.chapter;
+        const testament =
+          this.state.testament === Testament.NEW
+            ? NewTestamentBooks[this.props.language]
+            : OldTestamentBooks[this.props.language];
+        const text = testament[this.state.book] + " " + this.state.chapter;
         return this.state.loadingVerses ? <Loading text={text} /> : verses;
       default:
         return this.getTestamentButtons();

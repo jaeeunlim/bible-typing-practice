@@ -51,13 +51,6 @@ export const newTestamentChapters = {
   Luke: 24,
   John: 21,
   Acts: 28,
-  James: 5,
-  "1 Peter": 5,
-  "2 Peter": 3,
-  "1 John": 5,
-  "2 John": 1,
-  "3 John": 1,
-  Jude: 1,
   Romans: 16,
   "1 Corinthians": 16,
   "2 Corinthians": 13,
@@ -72,19 +65,14 @@ export const newTestamentChapters = {
   Titus: 3,
   Philemon: 1,
   Hebrews: 13,
+  James: 5,
+  "1 Peter": 5,
+  "2 Peter": 3,
+  "1 John": 5,
+  "2 John": 1,
+  "3 John": 1,
+  Jude: 1,
   Revelation: 22
-};
-
-const getVersesBibleAPI = verse => verse.text.substr(0, verse.text.length - 1); // remove enter at the end
-
-export const fetchBibleVersesBibleAPI = async (book, chapter) => {
-  try {
-    var response = await fetch(`https://bible-api.com/${book}%20${chapter}`);
-    var { verses } = await response.json();
-    return verses.map(getVersesBibleAPI);
-  } catch (e) {
-    console.log(e);
-  }
 };
 
 const getVerses = chapter => {
@@ -96,11 +84,12 @@ const getVerses = chapter => {
   return verses;
 };
 
-export const fetchBibleVerses = async (book, chap) => {
+export const fetchBibleVerses = async (book, chap, version) => {
   try {
     var proxyURL = "https://evening-retreat-30371.herokuapp.com/";
     var response = await fetch(
-      proxyURL + `https://getbible.net/json?v=web&passage=${book}%20${chap}`
+      proxyURL +
+        `https://getbible.net/json?v=${version}&passage=${book}%20${chap}`
     );
     var text = await response.text();
     var { chapter } = JSON.parse(text.substr(1, text.length - 3));
