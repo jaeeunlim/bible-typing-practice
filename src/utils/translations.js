@@ -441,7 +441,8 @@ export const Labels = {
     go: "GO!",
     endOfBible: "You have reached the end of the Bible!",
     retry: "Retry",
-    nextVerse: "Next Verse"
+    nextVerse: "Next Verse",
+    language: "Language"
   },
   한글: {
     scriptures: "성경말씀",
@@ -458,7 +459,8 @@ export const Labels = {
     go: "시작!",
     endOfBible: "성경 마지막 절입니다!",
     retry: "다시시도",
-    nextVerse: "다음 절"
+    nextVerse: "다음 절",
+    language: "언어"
   }
 };
 

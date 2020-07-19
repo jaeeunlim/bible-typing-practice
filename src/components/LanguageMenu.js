@@ -2,8 +2,9 @@ import React from "react";
 import Button from "@material-ui/core/Button";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
+import Tooltip from "@material-ui/core/Tooltip";
 import Flag from "react-world-flags";
-import { Language } from "../utils/translations";
+import { Language, Labels } from "../utils/translations";
 
 export default class LanguageMenu extends React.Component {
   constructor(props) {
@@ -53,14 +54,16 @@ export default class LanguageMenu extends React.Component {
   render() {
     return (
       <div id="language-menu">
-        <Button
-          id="btn-language"
-          aria-controls="simple-menu"
-          aria-haspopup="true"
-          onClick={this.onClickLanguage}
-        >
-          {this.getFlag()}
-        </Button>
+        <Tooltip title={Labels[this.state.language].language}>
+          <Button
+            id="btn-language"
+            aria-controls="simple-menu"
+            aria-haspopup="true"
+            onClick={this.onClickLanguage}
+          >
+            {this.getFlag()}
+          </Button>
+        </Tooltip>
         <Menu
           id="simple-menu"
           keepMounted
