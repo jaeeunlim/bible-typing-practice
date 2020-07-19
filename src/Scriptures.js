@@ -276,6 +276,7 @@ export default class Scriptures extends React.Component {
   };
 
   render() {
+    window.scrollTo(0, 0); // scroll to top of page on re-render
     switch (this.state.show) {
       case ShowType.TESTAMENTS:
         return this.getTestamentButtons();
