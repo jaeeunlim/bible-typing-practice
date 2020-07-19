@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Quicksand&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap");
 
 html,
 body {
@@ -9,7 +10,7 @@ html,
 body,
 button,
 center {
-  font-family: "Quicksand", sans-serif;
+  font-family: "Quicksand", "Nanum Gothic", sans-serif;
 }
 
 .Key {
@@ -337,7 +338,7 @@ footer {
   padding: 30px;
   line-height: 2;
   font-size: 15px;
-  font-family: "Quicksand", sans-serif;
+  font-family: "Quicksand", "Nanum Gothic", sans-serif;
 }
 
 #text-incorrect {

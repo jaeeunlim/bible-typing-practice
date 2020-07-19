@@ -1,6 +1,6 @@
 /* Copied from react-burger-menu docs and customized */
 #App {
-  font-family: "Quicksand", sans-serif;
+  font-family: "Quicksand", "Nanum Gothic", sans-serif;
 
   /* Give app full page to work with */
   height: 100vh;
