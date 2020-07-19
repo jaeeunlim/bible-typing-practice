@@ -5,7 +5,13 @@ import "../css/styles.css";
 export default class BibleVerse extends React.Component {
   render() {
     return (
-      <div className="BibleVerse">
+      <div
+        className="BibleVerse"
+        style={{
+          fontSize: `${this.props.fontSize}`,
+          top: `${this.props.top}`
+        }}
+      >
         <p>
           <span id="typed">{this.props.typed}</span>
           <span id="typed-incorrect">{this.props.typedIncorrect}</span>

@@ -440,6 +440,8 @@ class Typing extends React.Component {
               typed={this.state.typed}
               verse={this.state.verse}
               typedIncorrect={this.state.typedIncorrect}
+              fontSize={this.state.showTextarea ? "20px" : "25px"}
+              top={this.state.showTextarea ? "5vh" : "10vh"}
             />
             <Editor
               show={this.state.showTextarea}

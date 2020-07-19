@@ -81,11 +81,9 @@ center {
 
 .BibleVerse {
   position: absolute;
-  top: 5vh;
   width: 80%;
   padding: 30px;
   line-height: 2;
-  font-size: 20px;
 }
 
 span#typed {

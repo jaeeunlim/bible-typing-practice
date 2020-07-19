@@ -130,7 +130,7 @@ export const NewTestamentBooks = {
     Jude: "Jude",
     Revelation: "Revelation"
   },
-  한국: {
+  한글: {
     Matthew: "마태복음",
     Mark: "마가복음",
     Luke: "누가복음",
@@ -432,7 +432,7 @@ export const Labels = {
     begin:
       "Click to begin timer with a countdown. Or type first character to begin timer automatically.",
     textarea:
-      "This is an optional textarea to help you visualize the content of what you type. You can turn off this feature from settings.",
+      "This is an optional textarea to visualize the content of what you type. You can turn off this feature from settings.",
     settings: "Settings",
     highlightKeys: "HIGHLIGHT KEYS",
     showTextarea: "SHOW TEXTAREA",
@@ -449,10 +449,10 @@ export const Labels = {
     begin:
       "클릭하면 카운트 다운으로 시작됩니다. 아니면 첫 타를 정확히 치시면 자동으로 시작됩니다.",
     textarea:
-      "위에 텍스트 영역 옵션은 타자 치는 내용을 볼 수 있게 하는 도구입니다. 설정에서 이 옵션을 끌 수 있습니다.",
+      "위에 연습용 텍스트 영역은 시간과 타자평가 없이 자유롭게 연습 할 수 있는 공간입니다. 설정에서 이 옵션을 끌 수 있습니다.",
     settings: "설정",
     highlightKeys: "키보드 하이라이트",
-    showTextarea: "텍스트 영역 보기",
+    showTextarea: "연습용 텍스트 영역 보기",
     exit: "나가기",
     reset: "다시시작",
     go: "시작!",
