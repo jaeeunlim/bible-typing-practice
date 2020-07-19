@@ -115,6 +115,7 @@ class Typing extends React.Component {
   };
 
   onKeyDown = event => {
+    // for detecting delete
     if (event.keyCode === 8) {
       if (this.state.typeBegin) {
         if (this.state.typedIncorrect.length > 0) {
@@ -134,7 +135,9 @@ class Typing extends React.Component {
             decomposedIndex: 0,
             decomposedChar: decomposeChar(
               this.props.language,
-              mapSymbolToKey(this.state.typed.charAt(-1))
+              mapSymbolToKey(
+                this.state.typed.charAt(this.state.typed.length - 1)
+              )
             ),
             verse: this.state.typed.substr(-1).concat(this.state.verse),
             typed: this.state.typed.substr(0, this.state.typed.length - 1)
@@ -239,7 +242,13 @@ class Typing extends React.Component {
       BibleVersion[this.props.language]
     ).then(nextVerseInfo => {
       if (nextVerseInfo !== null) {
-        this.setState({ verse: nextVerseInfo.text });
+        this.setState({
+          verse: nextVerseInfo.text,
+          decomposedChar: decomposeChar(
+            this.props.language,
+            mapSymbolToKey(nextVerseInfo.text.charAt(0))
+          )
+        });
         goToTypingPage(this.props)(
           nextVerseInfo.testament,
           nextVerseInfo.book,

@@ -79,7 +79,13 @@ const getVerses = chapter => {
   var verses = [];
   Object.keys(chapter).forEach(function(key) {
     var text = chapter[key].verse;
-    verses.push(text.substr(0, text.length - 2)); // remove enter at the end
+    var textPruned = text.substr(0, text.length - 2);
+    textPruned = textPruned.replace(
+      /([\u4e00-\u9fff\u3400-\u4dff\uf900-\ufaff])/g,
+      ""
+    ); // remove Chinese characters
+    textPruned = textPruned.replace("()", ""); // remove empty parentheses
+    verses.push(textPruned); // remove enter at the end
   });
   return verses;
 };
