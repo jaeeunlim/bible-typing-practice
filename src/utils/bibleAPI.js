@@ -99,16 +99,22 @@ export const fetchBibleVerses = async (book, chap, version) => {
   }
 };
 
-export const getBibleVerse = async (book, chapter, verse) => {
+export const getBibleVerse = async (book, chapter, verse, version) => {
   try {
-    var bibleVerses = await fetchBibleVerses(book, chapter);
+    var bibleVerses = await fetchBibleVerses(book, chapter, version);
     return bibleVerses[verse - 1]; // list is zero-indexed
   } catch (e) {
     console.log(e);
   }
 };
 
-export const getNextVerseInfo = async (testament, book, chapter, verse) => {
+export const getNextVerseInfo = async (
+  testament,
+  book,
+  chapter,
+  verse,
+  version
+) => {
   var nextTestament = testament;
   var nextBook = book;
   var nextChapter = chapter;
@@ -122,20 +128,20 @@ export const getNextVerseInfo = async (testament, book, chapter, verse) => {
 
   const books = Object.keys(testamentChapters);
 
-  const fetchedVerses = await fetchBibleVerses(book, chapter);
+  const fetchedVerses = await fetchBibleVerses(book, chapter, version);
   if (verse in fetchedVerses) {
     // next verse is in same chapter
     nextVerse = parseInt(verse, 10) + 1;
     nextText = fetchedVerses[verse];
   } else if (parseInt(chapter, 10) + 1 <= testamentChapters[book]) {
     // next verse is in next chapter of same book
-    nextText = await getBibleVerse(book, parseInt(chapter, 10) + 1, 1);
+    nextText = await getBibleVerse(book, parseInt(chapter, 10) + 1, 1, version);
     nextChapter = parseInt(chapter, 10) + 1;
     nextVerse = 1;
   } else if (books.indexOf(book) < books.length - 1) {
     // next verse is in the next book of same testament
     nextBook = books[books.indexOf(book) + 1];
-    nextText = await getBibleVerse(nextBook, 1, 1);
+    nextText = await getBibleVerse(nextBook, 1, 1, version);
     nextChapter = 1;
     nextVerse = 1;
   } else {
@@ -144,7 +150,7 @@ export const getNextVerseInfo = async (testament, book, chapter, verse) => {
       testamentChapters = newTestamentChapters;
       const newTestamentBooks = Object.keys(testamentChapters);
       nextBook = newTestamentBooks[0];
-      nextText = await getBibleVerse(nextBook, 1, 1);
+      nextText = await getBibleVerse(nextBook, 1, 1, version);
       nextTestament = Testament.NEW;
       nextChapter = 1;
       nextVerse = 1;

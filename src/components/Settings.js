@@ -7,6 +7,7 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import Switch from "@material-ui/core/Switch";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
+import { Labels } from "../utils/translations";
 
 export default class Settings extends React.Component {
   constructor(props) {
@@ -28,14 +29,14 @@ export default class Settings extends React.Component {
     return (
       <Dialog open={this.state.open}>
         <DialogTitle>
-          <center>Settings</center>
+          <center>{Labels[this.props.language].settings}</center>
         </DialogTitle>
         <DialogContent>
           <center>{this.getHighlightKeysControl()}</center>
           <center>{this.getTextareaControl()}</center>
           <center>
             <Button size="small" onClick={this.onClickExit}>
-              Exit
+              {Labels[this.props.language].exit}
             </Button>
           </center>
         </DialogContent>
@@ -54,7 +55,7 @@ export default class Settings extends React.Component {
             onChange={this.props.onClickHighlight}
           />
         }
-        label="HIGHLIGHT KEYS"
+        label={Labels[this.props.language].highlightKeys}
         labelPlacement="end"
       />
     );
@@ -71,7 +72,7 @@ export default class Settings extends React.Component {
             onChange={this.props.onClickShowTextarea}
           />
         }
-        label="SHOW TEXTAREA"
+        label={Labels[this.props.language].showTextarea}
         labelPlacement="end"
       />
     );
@@ -80,7 +81,7 @@ export default class Settings extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <Tooltip title="Settings">
+        <Tooltip title={Labels[this.props.language].settings}>
           <button id="btn-settings" onClick={this.onClickSettings}>
             <IoMdSettings />
           </button>

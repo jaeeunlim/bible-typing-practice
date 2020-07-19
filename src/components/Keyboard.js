@@ -1,325 +1,10 @@
 import React from "react";
+import { Key } from "./Key";
+import { KeyboardLayout, KeyMap } from "../utils/translations";
+
 import "../css/styles.css";
 
-import { Key } from "./Key";
-
 const TOTALKEYS = 63;
-
-const BackgroundColor = {
-  ROW0: [
-    "#F1948A",
-    "#F1948A",
-    "#F5B041",
-    "#F7DC6F",
-    "#ABEBC6",
-    "#ABEBC6",
-    "#45B39D",
-    "#45B39D",
-    "#85C1E9",
-    "#5499C7",
-    "#BB8FCE",
-    "#BB8FCE",
-    "#BB8FCE",
-    "#BB8FCE"
-  ],
-  ROW1: [
-    "#F1948A",
-    "#F1948A",
-    "#F5B041",
-    "#F7DC6F",
-    "#ABEBC6",
-    "#ABEBC6",
-    "#45B39D",
-    "#45B39D",
-    "#85C1E9",
-    "#5499C7",
-    "#BB8FCE",
-    "#BB8FCE",
-    "#BB8FCE",
-    "#BB8FCE"
-  ],
-  ROW2: [
-    "#F1948A",
-    "#F1948A",
-    "#F5B041",
-    "#F7DC6F",
-    "#ABEBC6",
-    "#ABEBC6",
-    "#45B39D",
-    "#45B39D",
-    "#85C1E9",
-    "#5499C7",
-    "#BB8FCE",
-    "#BB8FCE",
-    "#BB8FCE"
-  ],
-  ROW3: [
-    "#F1948A",
-    "#F1948A",
-    "#F5B041",
-    "#F7DC6F",
-    "#ABEBC6",
-    "#ABEBC6",
-    "#45B39D",
-    "#45B39D",
-    "#85C1E9",
-    "#5499C7",
-    "#BB8FCE",
-    "#BB8FCE"
-  ],
-  ROW4: [
-    "white",
-    "white",
-    "white",
-    "white",
-    "#EAEDED",
-    "white",
-    "white",
-    "white",
-    "white",
-    "white"
-  ]
-};
-
-const KeyWidth = {
-  ROW0: [
-    "5.6vw",
-    "5.6vw",
-    "5.6vw",
-    "5.6vw",
-    "5.6vw",
-    "5.6vw",
-    "5.6vw",
-    "5.6vw",
-    "5.6vw",
-    "5.6vw",
-    "5.6vw",
-    "5.6vw",
-    "5.6vw",
-    "9vw"
-  ],
-  ROW1: [
-    "9vw",
-    "5.6vw",
-    "5.6vw",
-    "5.6vw",
-    "5.6vw",
-    "5.6vw",
-    "5.6vw",
-    "5.6vw",
-    "5.6vw",
-    "5.6vw",
-    "5.6vw",
-    "5.6vw",
-    "5.6vw",
-    "5.6vw"
-  ],
-  ROW2: [
-    "10.6vw",
-    "5.6vw",
-    "5.6vw",
-    "5.6vw",
-    "5.6vw",
-    "5.6vw",
-    "5.6vw",
-    "5.6vw",
-    "5.6vw",
-    "5.6vw",
-    "5.6vw",
-    "5.6vw",
-    "10.6vw"
-  ],
-  ROW3: [
-    "14vw",
-    "5.6vw",
-    "5.6vw",
-    "5.6vw",
-    "5.6vw",
-    "5.6vw",
-    "5.6vw",
-    "5.6vw",
-    "5.6vw",
-    "5.6vw",
-    "5.6vw",
-    "14vw"
-  ],
-  ROW4: [
-    "5.6vw",
-    "5.6vw",
-    "5.6vw",
-    "7.4vw",
-    "32vw",
-    "7.4vw",
-    "5.6vw",
-    "5.6vw",
-    "5.6vw",
-    "5.6vw"
-  ]
-};
-
-const Label = {
-  ROW0: [
-    "~ `",
-    "! 1",
-    "@ 2",
-    "# 3",
-    "$ 4",
-    "% 5",
-    "^ 6",
-    "& 7",
-    "* 8",
-    "( 9",
-    ") 0",
-    "_ -",
-    "+ =",
-    "del"
-  ],
-  ROW1: [
-    "tab",
-    "Q ㅂ",
-    "W ㅈ",
-    "E ㄷ",
-    "R ㄱ",
-    "T ㅅ",
-    "Y ㅛ",
-    "U ㅕ",
-    "I ㅑ",
-    "O ㅐ",
-    "P ㅔ",
-    "{ [",
-    "} ]",
-    "| \\"
-  ],
-  ROW2: [
-    "caps lock",
-    "A ㅁ",
-    "S ㄴ",
-    "D ㅇ",
-    "F ㄹ",
-    "G ㅎ",
-    "H ㅗ",
-    "J ㅓ",
-    "K ㅏ",
-    "L ㅣ",
-    ": ;",
-    "\" '",
-    "return"
-  ],
-  ROW3: [
-    "shift",
-    "Z ㅋ",
-    "X ㅌ",
-    "C ㅊ",
-    "V ㅍ",
-    "B ㅠ",
-    "N ㅜ",
-    "M ㅡ",
-    "< ,",
-    "> .",
-    "? /",
-    "shift"
-  ],
-  ROW4: ["fn", "ctrl", "alt", "cmd", "", "cmd", "alt", "", "", ""]
-};
-
-const KeyMap = {
-  "~": [0, 52],
-  "`": [0],
-  "!": [1, 52],
-  "1": [1],
-  "@": [2, 52],
-  "2": [2],
-  "#": [3, 52],
-  "3": [3],
-  $: [4, 52],
-  "4": [4],
-  "%": [5, 52],
-  "5": [5],
-  "^": [6, 41],
-  "6": [6],
-  "&": [7, 41],
-  "7": [7],
-  "*": [8, 41],
-  "8": [8],
-  "(": [9, 41],
-  "9": [9],
-  ")": [10, 41],
-  "0": [10],
-  _: [11, 41],
-  "-": [11],
-  "+": [12, 41],
-  "=": [12],
-  Q: [15, 52],
-  q: [15],
-  W: [16, 52],
-  w: [16],
-  E: [17, 52],
-  e: [17],
-  R: [18, 52],
-  r: [18],
-  T: [19, 52],
-  t: [19],
-  Y: [20, 41],
-  y: [20],
-  U: [21, 41],
-  u: [21],
-  I: [22, 41],
-  i: [22],
-  O: [23, 41],
-  o: [23],
-  P: [24, 41],
-  p: [24],
-  "{": [25, 41],
-  "[": [25],
-  "}": [26, 41],
-  "]": [26],
-  "|": [27, 41],
-  "\\": [27],
-  A: [29, 52],
-  a: [29],
-  S: [30, 52],
-  s: [30],
-  D: [31, 52],
-  d: [31],
-  F: [32, 52],
-  f: [32],
-  G: [33, 52],
-  g: [33],
-  H: [34, 41],
-  h: [34],
-  J: [35, 41],
-  j: [35],
-  K: [36, 41],
-  k: [36],
-  L: [37, 41],
-  l: [37],
-  ":": [38, 41],
-  ";": [38],
-  '"': [39, 41],
-  "'": [39],
-  Z: [42, 52],
-  z: [42],
-  X: [43, 52],
-  x: [43],
-  C: [44, 52],
-  c: [44],
-  V: [45, 52],
-  v: [45],
-  B: [46, 52],
-  b: [46],
-  N: [47, 41],
-  n: [47],
-  M: [48, 41],
-  m: [48],
-  "<": [49, 41],
-  ",": [49],
-  ">": [50, 41],
-  ".": [50],
-  "?": [51, 41],
-  "/": [51],
-  " ": [57],
-  del: [13]
-};
 
 export const mapSymbolToKey = symbol => {
   switch (symbol) {
@@ -340,9 +25,225 @@ export default class Keyboard extends React.Component {
     this.state = {
       borderColors: Array(TOTALKEYS).fill("#d0d3d4"),
       prevKey: -1,
-      highlightKeys: true
+      highlightKeys: true,
+      labels: {
+        ROW0: [
+          "~ `",
+          "! 1",
+          "@ 2",
+          "# 3",
+          "$ 4",
+          "% 5",
+          "^ 6",
+          "& 7",
+          "* 8",
+          "( 9",
+          ") 0",
+          "_ -",
+          "+ =",
+          "del"
+        ],
+        ROW1: [
+          "tab",
+          KeyboardLayout[this.props.language]["Q"],
+          KeyboardLayout[this.props.language]["W"],
+          KeyboardLayout[this.props.language]["E"],
+          KeyboardLayout[this.props.language]["R"],
+          KeyboardLayout[this.props.language]["T"],
+          KeyboardLayout[this.props.language]["Y"],
+          KeyboardLayout[this.props.language]["U"],
+          KeyboardLayout[this.props.language]["I"],
+          KeyboardLayout[this.props.language]["O"],
+          KeyboardLayout[this.props.language]["P"],
+          "{ [",
+          "} ]",
+          "| \\"
+        ],
+        ROW2: [
+          "caps lock",
+          KeyboardLayout[this.props.language]["A"],
+          KeyboardLayout[this.props.language]["S"],
+          KeyboardLayout[this.props.language]["D"],
+          KeyboardLayout[this.props.language]["F"],
+          KeyboardLayout[this.props.language]["G"],
+          KeyboardLayout[this.props.language]["H"],
+          KeyboardLayout[this.props.language]["J"],
+          KeyboardLayout[this.props.language]["K"],
+          KeyboardLayout[this.props.language]["L"],
+          ": ;",
+          "\" '",
+          "return"
+        ],
+        ROW3: [
+          "shift",
+          KeyboardLayout[this.props.language]["Z"],
+          KeyboardLayout[this.props.language]["X"],
+          KeyboardLayout[this.props.language]["C"],
+          KeyboardLayout[this.props.language]["V"],
+          KeyboardLayout[this.props.language]["B"],
+          KeyboardLayout[this.props.language]["N"],
+          KeyboardLayout[this.props.language]["M"],
+          "< ,",
+          "> .",
+          "? /",
+          "shift"
+        ],
+        ROW4: ["fn", "ctrl", "alt", "cmd", "", "cmd", "alt", "", "", ""]
+      }
     };
   }
+
+  BackgroundColor = {
+    ROW0: [
+      "#F1948A",
+      "#F1948A",
+      "#F5B041",
+      "#F7DC6F",
+      "#ABEBC6",
+      "#ABEBC6",
+      "#45B39D",
+      "#45B39D",
+      "#85C1E9",
+      "#5499C7",
+      "#BB8FCE",
+      "#BB8FCE",
+      "#BB8FCE",
+      "#BB8FCE"
+    ],
+    ROW1: [
+      "#F1948A",
+      "#F1948A",
+      "#F5B041",
+      "#F7DC6F",
+      "#ABEBC6",
+      "#ABEBC6",
+      "#45B39D",
+      "#45B39D",
+      "#85C1E9",
+      "#5499C7",
+      "#BB8FCE",
+      "#BB8FCE",
+      "#BB8FCE",
+      "#BB8FCE"
+    ],
+    ROW2: [
+      "#F1948A",
+      "#F1948A",
+      "#F5B041",
+      "#F7DC6F",
+      "#ABEBC6",
+      "#ABEBC6",
+      "#45B39D",
+      "#45B39D",
+      "#85C1E9",
+      "#5499C7",
+      "#BB8FCE",
+      "#BB8FCE",
+      "#BB8FCE"
+    ],
+    ROW3: [
+      "#F1948A",
+      "#F1948A",
+      "#F5B041",
+      "#F7DC6F",
+      "#ABEBC6",
+      "#ABEBC6",
+      "#45B39D",
+      "#45B39D",
+      "#85C1E9",
+      "#5499C7",
+      "#BB8FCE",
+      "#BB8FCE"
+    ],
+    ROW4: [
+      "white",
+      "white",
+      "white",
+      "white",
+      "#EAEDED",
+      "white",
+      "white",
+      "white",
+      "white",
+      "white"
+    ]
+  };
+
+  KeyWidth = {
+    ROW0: [
+      "5.6vw",
+      "5.6vw",
+      "5.6vw",
+      "5.6vw",
+      "5.6vw",
+      "5.6vw",
+      "5.6vw",
+      "5.6vw",
+      "5.6vw",
+      "5.6vw",
+      "5.6vw",
+      "5.6vw",
+      "5.6vw",
+      "9vw"
+    ],
+    ROW1: [
+      "9vw",
+      "5.6vw",
+      "5.6vw",
+      "5.6vw",
+      "5.6vw",
+      "5.6vw",
+      "5.6vw",
+      "5.6vw",
+      "5.6vw",
+      "5.6vw",
+      "5.6vw",
+      "5.6vw",
+      "5.6vw",
+      "5.6vw"
+    ],
+    ROW2: [
+      "10.6vw",
+      "5.6vw",
+      "5.6vw",
+      "5.6vw",
+      "5.6vw",
+      "5.6vw",
+      "5.6vw",
+      "5.6vw",
+      "5.6vw",
+      "5.6vw",
+      "5.6vw",
+      "5.6vw",
+      "10.6vw"
+    ],
+    ROW3: [
+      "14vw",
+      "5.6vw",
+      "5.6vw",
+      "5.6vw",
+      "5.6vw",
+      "5.6vw",
+      "5.6vw",
+      "5.6vw",
+      "5.6vw",
+      "5.6vw",
+      "5.6vw",
+      "14vw"
+    ],
+    ROW4: [
+      "5.6vw",
+      "5.6vw",
+      "5.6vw",
+      "7.4vw",
+      "32vw",
+      "7.4vw",
+      "5.6vw",
+      "5.6vw",
+      "5.6vw",
+      "5.6vw"
+    ]
+  };
 
   componentDidUpdate(prevProps) {
     if (prevProps.highlight !== this.props.highlight) {
@@ -353,13 +254,82 @@ export default class Keyboard extends React.Component {
       });
     }
 
+    if (prevProps.language !== this.props.language) {
+      this.setState({
+        labels: {
+          ROW0: [
+            "~ `",
+            "! 1",
+            "@ 2",
+            "# 3",
+            "$ 4",
+            "% 5",
+            "^ 6",
+            "& 7",
+            "* 8",
+            "( 9",
+            ") 0",
+            "_ -",
+            "+ =",
+            "del"
+          ],
+          ROW1: [
+            "tab",
+            KeyboardLayout[this.props.language]["Q"],
+            KeyboardLayout[this.props.language]["W"],
+            KeyboardLayout[this.props.language]["E"],
+            KeyboardLayout[this.props.language]["R"],
+            KeyboardLayout[this.props.language]["T"],
+            KeyboardLayout[this.props.language]["Y"],
+            KeyboardLayout[this.props.language]["U"],
+            KeyboardLayout[this.props.language]["I"],
+            KeyboardLayout[this.props.language]["O"],
+            KeyboardLayout[this.props.language]["P"],
+            "{ [",
+            "} ]",
+            "| \\"
+          ],
+          ROW2: [
+            "caps lock",
+            KeyboardLayout[this.props.language]["A"],
+            KeyboardLayout[this.props.language]["S"],
+            KeyboardLayout[this.props.language]["D"],
+            KeyboardLayout[this.props.language]["F"],
+            KeyboardLayout[this.props.language]["G"],
+            KeyboardLayout[this.props.language]["H"],
+            KeyboardLayout[this.props.language]["J"],
+            KeyboardLayout[this.props.language]["K"],
+            KeyboardLayout[this.props.language]["L"],
+            ": ;",
+            "\" '",
+            "return"
+          ],
+          ROW3: [
+            "shift",
+            KeyboardLayout[this.props.language]["Z"],
+            KeyboardLayout[this.props.language]["X"],
+            KeyboardLayout[this.props.language]["C"],
+            KeyboardLayout[this.props.language]["V"],
+            KeyboardLayout[this.props.language]["B"],
+            KeyboardLayout[this.props.language]["N"],
+            KeyboardLayout[this.props.language]["M"],
+            "< ,",
+            "> .",
+            "? /",
+            "shift"
+          ],
+          ROW4: ["fn", "ctrl", "alt", "cmd", "", "cmd", "alt", "", "", ""]
+        }
+      });
+    }
+
     if (
       this.state.highlightKeys &&
       this.props.value !== -1 &&
       this.props.value !== this.state.prevKey
     ) {
       const newBorderColors = this.getUnhighlightedBorderColors();
-      for (var j of KeyMap[this.props.value]) {
+      for (var j of KeyMap[this.props.language][this.props.value]) {
         newBorderColors[j] = "red"; // highlight current key
       }
 
@@ -382,7 +352,7 @@ export default class Keyboard extends React.Component {
   getUnhighlightedBorderColors = () => {
     const newBorderColors = [...this.state.borderColors];
     if (this.state.prevKey !== -1)
-      for (var i of KeyMap[this.state.prevKey]) {
+      for (var i of KeyMap[this.props.language][this.state.prevKey]) {
         newBorderColors[i] = "#d0d3d4"; // unhighlight previous key
       }
     return newBorderColors;
@@ -407,41 +377,43 @@ export default class Keyboard extends React.Component {
 
   render() {
     const row0 = this.getRowButtons(
-      BackgroundColor.ROW0,
-      KeyWidth.ROW0,
-      Label.ROW0,
+      this.BackgroundColor.ROW0,
+      this.KeyWidth.ROW0,
+      this.state.labels.ROW0,
       0
     );
 
     const row1 = this.getRowButtons(
-      BackgroundColor.ROW1,
-      KeyWidth.ROW1,
-      Label.ROW1,
-      Label.ROW0.length
+      this.BackgroundColor.ROW1,
+      this.KeyWidth.ROW1,
+      this.state.labels.ROW1,
+      this.state.labels.ROW0.length
     );
 
     const row2 = this.getRowButtons(
-      BackgroundColor.ROW2,
-      KeyWidth.ROW2,
-      Label.ROW2,
-      Label.ROW0.length + Label.ROW1.length
+      this.BackgroundColor.ROW2,
+      this.KeyWidth.ROW2,
+      this.state.labels.ROW2,
+      this.state.labels.ROW0.length + this.state.labels.ROW1.length
     );
 
     const row3 = this.getRowButtons(
-      BackgroundColor.ROW3,
-      KeyWidth.ROW3,
-      Label.ROW3,
-      Label.ROW0.length + Label.ROW1.length + Label.ROW2.length
+      this.BackgroundColor.ROW3,
+      this.KeyWidth.ROW3,
+      this.state.labels.ROW3,
+      this.state.labels.ROW0.length +
+        this.state.labels.ROW1.length +
+        this.state.labels.ROW2.length
     );
 
     const row4 = this.getRowButtons(
-      BackgroundColor.ROW4,
-      KeyWidth.ROW4,
-      Label.ROW4,
-      Label.ROW0.length +
-        Label.ROW1.length +
-        Label.ROW2.length +
-        Label.ROW3.length
+      this.BackgroundColor.ROW4,
+      this.KeyWidth.ROW4,
+      this.state.labels.ROW4,
+      this.state.labels.ROW0.length +
+        this.state.labels.ROW1.length +
+        this.state.labels.ROW2.length +
+        this.state.labels.ROW3.length
     );
 
     return (

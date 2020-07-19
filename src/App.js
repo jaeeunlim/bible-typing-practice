@@ -26,7 +26,11 @@ export default class App extends React.Component {
     return (
       <div id="App">
         <LanguageMenu setLanguage={this.setLanguage} />
-        <Sidebar pageWrapId={"page-wrap"} outerContainerId={"App"} />
+        <Sidebar
+          pageWrapId={"page-wrap"}
+          outerContainerId={"App"}
+          language={this.state.language}
+        />
         <Switch>
           <Route
             exact
