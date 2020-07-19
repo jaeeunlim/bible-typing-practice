@@ -70,7 +70,13 @@ class Typing extends React.Component {
           this.props.match.params.verse,
           text
         );
-        this.setState({ verse: text });
+        this.setState({
+          verse: text,
+          decomposedChar: decomposeChar(
+            this.props.language,
+            mapSymbolToKey(text.charAt(0))
+          )
+        });
       });
     }
   }
