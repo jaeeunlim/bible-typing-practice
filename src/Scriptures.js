@@ -43,6 +43,7 @@ export default class Scriptures extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
+    window.scrollTo(0, 0); // scroll to top of page on re-render
     if (
       prevProps.language !== this.props.language &&
       this.state.show === ShowType.VERSES
@@ -276,7 +277,6 @@ export default class Scriptures extends React.Component {
   };
 
   render() {
-    window.scrollTo(0, 0); // scroll to top of page on re-render
     switch (this.state.show) {
       case ShowType.TESTAMENTS:
         return this.getTestamentButtons();

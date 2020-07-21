@@ -447,7 +447,7 @@ class Typing extends React.Component {
               verse={this.state.verse}
               typedIncorrect={this.state.typedIncorrect}
               fontSize={this.state.showTextarea ? "20px" : "25px"}
-              top={this.state.showTextarea ? "5vh" : "10vh"}
+              top={this.state.showTextarea ? "5vh" : "7vh"}
             />
             <Editor
               show={this.state.showTextarea}

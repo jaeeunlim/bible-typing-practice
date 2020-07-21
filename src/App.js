@@ -49,7 +49,7 @@ export default class App extends React.Component {
         </Switch>
         <div id="page-wrap" />
         <footer>
-          <small>&copy; Copyright {this.currentYear}, Esther Lim</small>
+          <small>&copy; Copyright {this.currentYear}, Jae-Eun Lim</small>
         </footer>
       </div>
     );
