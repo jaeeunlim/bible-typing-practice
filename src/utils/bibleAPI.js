@@ -78,9 +78,8 @@ export const newTestamentChapters = {
 const getVerses = chapter => {
   var verses = [];
   Object.keys(chapter).forEach(function(key) {
-    var text = chapter[key].verse;
-    var textPruned = text.substr(0, text.length - 2);
-    textPruned = textPruned.replace(
+    var text = chapter[key].text;
+    var textPruned = text.replace(
       /([\u4e00-\u9fff\u3400-\u4dff\uf900-\ufaff])/g,
       ""
     ); // remove Chinese characters
@@ -92,14 +91,11 @@ const getVerses = chapter => {
 
 export const fetchBibleVerses = async (book, chap, version) => {
   try {
-    var proxyURL = "https://evening-retreat-30371.herokuapp.com/";
     var response = await fetch(
-      proxyURL +
-        `https://getbible.net/json?v=${version}&passage=${book}%20${chap}`
+      `https://api.biblesupersearch.com/api?bible=${version}&reference=${book.replace(/\s/g, '').toLowerCase()}%20${chap}`
     );
-    var text = await response.text();
-    var { chapter } = JSON.parse(text.substr(1, text.length - 3));
-    return getVerses(chapter);
+    var chapter = await response.json();
+    return getVerses(chapter.results[0]['verses'][version][chap]);
   } catch (e) {
     console.log(e);
   }
