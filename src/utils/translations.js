@@ -6,7 +6,7 @@ export const Language = {
 };
 
 export const BibleVersion = {
-  English: "asv",
+  English: "web",
   한글: "korean"
 };
 
